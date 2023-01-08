@@ -21,7 +21,7 @@ public class RobotContainer {
 
 	public RobotContainer() {
 		mArm.setDefaultCommand(new RunCommand(()->{
-			if(mJoystick.getRawAxis(0))
+			if(mJoystick.getRawAxis(0) )
 		}, mArm));
 		mDrivetrain.setDefaultCommand(new DrivetrainTeleOp(
 				mDrivetrain,
