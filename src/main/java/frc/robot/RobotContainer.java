@@ -1,6 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import frc.robot.commands.ArmSetPercentOutput;
@@ -19,7 +20,9 @@ public class RobotContainer {
 	private final Arm mArm = new Arm();
 
 	public RobotContainer() {
-		mArm.setDefaultCommand(new ArmSetPercentOutput(mArm, 0.0));
+		mArm.setDefaultCommand(new RunCommand(()->{
+			if(mJoystick.getRawAxis(0))
+		}, mArm));
 		mDrivetrain.setDefaultCommand(new DrivetrainTeleOp(
 				mDrivetrain,
 				() -> -modifyAxis(mXbox.getLeftY()) * Drivetrain.MAX_VELOCITY_METERS_PER_SECOND,

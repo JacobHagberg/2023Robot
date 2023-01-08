@@ -8,14 +8,21 @@ import frc.robot.Constants;
 
 public class Arm extends SubsystemBase {
     private final int CURRENT_LIMIT = 30; 
-    private final CANSparkMax mMotor = new CANSparkMax(Constants.ARM, CANSparkMax.MotorType.kBrushless);
+    private final CANSparkMax mMotorArm = new CANSparkMax(Constants.ARM, CANSparkMax.MotorType.kBrushless);
+    private final CANSparkMax mMotorElevator = new CANSparkMax(Constants.ELEVATOR, CANSparkMax.MotorType.kBrushless);
 
     public Arm(){
-        mMotor.restoreFactoryDefaults();
-        mMotor.setIdleMode(IdleMode.kBrake);
-        mMotor.setSmartCurrentLimit(CURRENT_LIMIT);
-        mMotor.setInverted(false);
-        mMotor.burnFlash();
+        mMotorArm.restoreFactoryDefaults();
+        mMotorArm.setIdleMode(IdleMode.kBrake);
+        mMotorArm.setSmartCurrentLimit(CURRENT_LIMIT);
+        mMotorArm.setInverted(false);
+        mMotorArm.burnFlash();
+
+        mMotorElevator.restoreFactoryDefaults();
+        mMotorElevator.setIdleMode(IdleMode.kBrake);
+        mMotorElevator.setSmartCurrentLimit(CURRENT_LIMIT);
+        mMotorElevator.setInverted(false);
+        mMotorElevator.burnFlash();
     }
 
     public void setPercentOutput(double output) {
@@ -25,7 +32,7 @@ public class Arm extends SubsystemBase {
             output = -1.0;
         }
 
-        mMotor.set(output);
+        mMotorArm.set(output);
     }
 }
 
