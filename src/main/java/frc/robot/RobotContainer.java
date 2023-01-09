@@ -21,7 +21,22 @@ public class RobotContainer {
 
 	public RobotContainer() {
 		mArm.setDefaultCommand(new RunCommand(()->{
-			if(mJoystick.getRawAxis(0) )
+            double angleChange = 0, lengthChange = 0;
+            
+			if(|mJoystick.getRawAxis(0)| > 0.15){
+                angleChange = mJoystick.getRawAxis(0);
+            }
+            if(mJoystick.getTRIGGER()){
+                lengthChange += 0.2
+            }
+            if(mJoystick.getTHUMB()){
+                angleChange -= 0.2
+            }
+
+            double angle = mArm.GetAngle();
+            double length = mArm.GetLength();
+            mArm.SetLengthAndAngle(angle + angleChange, length + lengthChange);
+
 		}, mArm));
 		mDrivetrain.setDefaultCommand(new DrivetrainTeleOp(
 				mDrivetrain,
